@@ -4,8 +4,6 @@ using std::cout;
 using std::cin;
 using std::string;
 
-
-
 int main() 
 {
 	TicTacToe game;
@@ -14,8 +12,30 @@ int main()
 
 	do
 	{
-		cout << "Enter first player (X or Y): ";
+		cout << "Enter first player (X or O) or Q to quit: ";
 		cin >> first_player;
+
+		if (first_player == "q" || first_player == "Q")
+		{
+			cout << "See you next time!";
+			break;
+		}
+
+
+		while (first_player != "X" && first_player != "O")
+		{
+			cout << "ERROR! Please enter X or O: ";
+			cin >> first_player;
+
+			if (first_player == "q" || first_player =="Q")
+			{
+				cout << "Thanks for playing.\n";
+				break;
+			}
+		}
+
+		if(first_player == "q" || first_player == "Q")
+			break;
 
 		game.start_game(first_player);
 
@@ -35,8 +55,17 @@ int main()
 			game.display_board();
 		}
 
-		cout << "Game Over! Player" << game.get_player()<< " wins or it's a draw. \n";
-		cout << "Play again, enter y or Y? ";
+		string winner = game.get_winner();
+		if (winner == "C")
+		{
+			cout << "It's a Tie!\n";
+		}
+		else
+		{
+			cout << "GAME OVER! Player "<< winner << " wins!\n";
+		}
+
+		cout << "Play again (enter y or Y) or would you like to Quit (enter q or Q)?: ";
 		cin>>user_choice;
 
 	} while (user_choice == 'y' || user_choice == 'Y');
