@@ -29,7 +29,11 @@ void TicTacToe::mark_board(int position)
 {
     pegs[position-1] = player;
     //display_board();
-    set_next_player();
+    if (!game_over()) 
+    {
+        set_next_player();
+    }
+    
 }
 
 void TicTacToe::display_board() const
