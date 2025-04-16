@@ -257,10 +257,10 @@ TEST_CASE("Test TicTacToe manager get winner total function")
 	game2.start_game("O");
 	game2.mark_board(1);
 	game2.mark_board(2);
-	game2.mark_board(3);
 	game2.mark_board(5);
 	game2.mark_board(4);
-	game2.mark_board(8);
+	game2.mark_board(9);
+
 	REQUIRE(game2.game_over() == true);
 	REQUIRE(game2.get_winner() == "O");
 	manager.save_game(game2);
@@ -277,7 +277,7 @@ TEST_CASE("Test TicTacToe manager get winner total function")
 	game3.mark_board(7);
 	game3.mark_board(9);
 	REQUIRE(game3.game_over() == true);
-	REQUIRE(game3.get_winner() == "O");
+	REQUIRE(game3.get_winner() == "C");
 	manager.save_game(game3);
 
 	//get total tally
