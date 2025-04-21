@@ -1,6 +1,7 @@
-//cpp
+//cpp tictactoe
 
 #include "tic_tac_toe.h"
+#include <cmath>
 using std::cout;
 
 bool TicTacToe::game_over()
@@ -27,6 +28,10 @@ void TicTacToe::start_game(string first_player)
 	
 void TicTacToe::mark_board(int position)
 {
+    if (game_over())
+    {
+        return;
+    }
     pegs[position-1] = player;
     //display_board();
     if (!game_over()) 
@@ -38,18 +43,47 @@ void TicTacToe::mark_board(int position)
 
 void TicTacToe::display_board() const
 {
-    for (int i=0; i < pegs.size(); i += 3)
+    int width = board_size(); 
+
+    for (int i = 0; i < pegs.size(); i++)
     {
-        cout<<pegs[i]<<"|"<<pegs[i+1]<<"|"<<pegs[i+2]<<"\n";
+        cout << pegs[i];
+        if ((i + 1) % width == 0)
+        {
+            cout << "\n";
+        }
+        else
+        {
+            cout << "|";
+        }
     }
 }
+/*
+void TicTacToe::display_board() const
+{
+    int row_length = board_size() == 9 ? 3 : 4;
+
+    for (int i =0; i < pegs.size(); i += row_length)
+    {
+        for (int j=0; j < row_length; ++j)
+        {
+            cout << pegs[i+j];
+            if (j < row_length-1)
+            {
+                cout << "|";
+            }
+        }
+        cout << "\n";
+    }
+}
+*/
 
 // private functions
 void TicTacToe::clear_board()
 {
     for(auto& peg: pegs)
     {
-        peg = "";
+        peg = " ";
     }
 }
 
@@ -68,7 +102,7 @@ bool TicTacToe::check_board_full()
 {
     for (int i=0; i < pegs.size(); i++)
     {
-        if(pegs[i] == "")
+        if(pegs[i] == " ")
         {
             return false;
         }
@@ -84,60 +118,26 @@ void TicTacToe::set_winner(string winner1)
 
 bool TicTacToe::check_column_win()
 {
-    if (pegs[0] == pegs[3] && pegs[3] == pegs[6] && pegs[0] !="")
-    {
-        set_winner(pegs[0]);
-        return true;
-    }
-
-    if (pegs[1] == pegs[4] && pegs[4] == pegs[7] && pegs[1] !="")
-    {
-        set_winner(pegs[1]);
-        return true;
-    }
-
-    if (pegs[2] == pegs[5] && pegs[5] == pegs[8] && pegs[2] !="")
-    {
-        set_winner(pegs[2]);
-        return true;
-    }
     return false;
 }
 
 bool TicTacToe::check_row_win()
 {
-    if (pegs[0] == pegs[1] && pegs[1] == pegs[2] && pegs[0] !="")
-    {
-        set_winner(pegs[0]);
-        return true;
-    }
-
-    if (pegs[3] == pegs[4] && pegs[4] == pegs[5] && pegs[3] !="")
-    {
-        set_winner(pegs[3]);
-        return true;
-    }
-
-    if (pegs[6] == pegs[7] && pegs[7] == pegs[8] && pegs[6] !="")
-    {
-        set_winner(pegs[6]);
-        return true;
-    }
     return false;
 }
 
 bool TicTacToe::check_diagonal_win()
 {
-    if (pegs[0] == pegs[4] && pegs[4] == pegs[8] && pegs[0] !="")
-    {
-        set_winner(pegs[0]);
-        return true;
-    }
-    if (pegs[2] == pegs[4] && pegs[4] == pegs[6] && pegs[2] !="")
-    {
-        set_winner(pegs[2]);
-        return true;
-    }
     return false;
 }
 
+// new constructor for HW 9
+int TicTacToe::board_size() const
+{
+    return static_cast<int>(sqrt(pegs.size()));
+}
+
+int TicTacToe::player_board_size()
+{
+    return pegs.size();
+}

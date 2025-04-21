@@ -1,7 +1,7 @@
-
-
-//#include "tic_tac_toe_4.h"
-
+#include "tic_tac_toe.h"
+#include "tic_tac_toe_4.h"
+/*Modify check_column_win, check_row_win, and check_diagonal_win  
+     to detect if game is over or board is full,*/
 /*
 class function check_column_win
 Win by column if and return true if (each column index)
@@ -12,7 +12,7 @@ Win by column if and return true if (each column index)
 else
 false
 */
-/*
+
 bool TicTacToe4::check_column_win ()
 {
  for (int col = 0; col < 4; ++col)
@@ -22,6 +22,7 @@ bool TicTacToe4::check_column_win ()
     pegs[col] == pegs [col + 8] &&
     pegs [col] == pegs[col + 12])
     {
+        set_winner (pegs[col]);
         return true;
     }
  }   
@@ -29,9 +30,6 @@ bool TicTacToe4::check_column_win ()
  return false;
 
 }
-*/
-
-
 /*
 class function check_row_win
 Win by row if
@@ -41,8 +39,6 @@ Win by row if
 12,13,14, 15 are equal
 */
 
-
-/*
 bool TicTacToe4::check_row_win ()
 {
     for (int row = 0; row < 16; row += 4)
@@ -52,15 +48,13 @@ bool TicTacToe4::check_row_win ()
         pegs [row] == pegs[row + 2]&&
         pegs [row] == pegs[row + 3])
         {
+            set_winner(pegs[row]);
             return true;
         }
     } 
 
     return false;
 }
-
-*/
-
 
 /*
 class function check_diagonal_win
@@ -71,8 +65,6 @@ Win diagonally
 12,13,14, 15
 
 */
-
-/*
 bool TicTacToe4::check_diagonal_win () 
 {
     if (pegs[0] != " " && 
@@ -81,6 +73,7 @@ bool TicTacToe4::check_diagonal_win ()
         pegs[0] == pegs[15])
 
         {
+            set_winner(pegs[0]);
             return true;
         }
 
@@ -90,11 +83,9 @@ bool TicTacToe4::check_diagonal_win ()
         pegs[3] == pegs[12])
     
         {
+            set_winner(pegs[3]);
             return true;
         }
 
         return false;
-}
-        
-*/
-       
+}       
